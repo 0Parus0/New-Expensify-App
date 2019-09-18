@@ -1,0 +1,59 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "arrowFunctions": true,
+      "classes": true,
+      "spread": true
+    }
+  },
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "react/jsx-filename-extension": 0,
+    "react/state-in-constructor": 0,
+    "no-trailing-spaces": 0,
+    "react/destructuring-assignment": 0,
+    "arrow-body-style": 0,
+    "react/prop-types": 0,
+    "consistent-return": 0,
+    "jsx-a11y/accessible-emoji": 0,
+    "jsx-a11y/no-autofocus": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "import/no-named-as-default": 0,
+    "eslint no-control-regex": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/no-unescaped-entities": 0,
+    "object-curly-newline": 0,
+    "array-callback-return": 0,
+    "no-else-return": 0,
+    "no-unused-vars": 0,
+    "max-len": 0,
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ]
+  },
+  "plugins": [
+    "babel",
+    "html",
+    "react-hooks"
+  ]
+
+}
