@@ -1,8 +1,90 @@
+const path = require('path');
 const merge = require('webpack-merge');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const common = require('./webpack.common');
 
 
 module.exports = merge(common, {
   mode: 'production',
+  output: {
+    path: path.join(__dirname, 'public', 'dist'),
+    filename: '[name].[contentHash].bundle.js'
+  },  
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        react: {
+          test: /[\\/]node_modules[\\/]((react).*|(react-dom).*|(react-redux).*|(react-router-dom).*|(react-dates).*)[\\/]/,
+          // test: /[\\]node_modules[\\]/,
+          name: 'react',
+          chunks: 'all',
+          reuseExistingChunk: true
+        },
+        moment: {
+          test: /[\\/]node_modules[\\/]((moment).*)[\\/]/,
+          // test: /[\\]node_modules[\\]/,
+          name: 'moment',
+          chunks: 'all',
+          reuseExistingChunk: true
+        },
+        redux: {
+          test: /[\\/]node_modules[\\/]((redux).*)[\\/]/,
+          // test: /[\\]node_modules[\\]/,
+          name: 'redux',
+          chunks: 'all',
+          reuseExistingChunk: true
+        }
+      }
+    }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].[contentHash].css'
+    }),
+    new CleanWebpackPlugin({
+      dry: true,
+      verbose: true
+    }),
+    new OptimizeCSSAssetsPlugin({ 
+      cssProcessorOptions: { 
+        map: { 
+          inline: false,
+          annotation: true
+        } } 
+    }),
+    new BundleAnalyzerPlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      filename: './index.html'
+    })
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [MiniCssExtractPlugin.loader,
+          { 
+            loader: 'css-loader',
+            options: {
+              sourceMap: true
+            
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true
+            
+            }
+          }
+        ]
+      }
+    ]
+  },
   devtool: 'source-map'
 });

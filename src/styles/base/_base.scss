@@ -1,5 +1,6 @@
 *:focus {
   outline-color: aqua;
+  box-sizing: border-box;
 }
 
 html {
@@ -9,6 +10,10 @@ html {
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: $m-size;
+
+  .DateInput {
+    position: inherit;
+  }
 }
 
 button {
