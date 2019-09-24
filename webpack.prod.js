@@ -57,7 +57,7 @@ module.exports = merge(common, {
           annotation: true
         } } 
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: './index.html'
