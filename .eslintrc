@@ -36,6 +36,8 @@
     "eslint no-control-regex": 0,
     "react/jsx-props-no-spreading": 0,
     "react/no-unescaped-entities": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "object-curly-newline": 0,
     "array-callback-return": 0,
     "no-else-return": 0,
@@ -48,7 +50,12 @@
         "avoidEscape": true,
         "allowTemplateLiterals": true
       }
-    ]
+    ],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": true,
+      "optionalDependencies": false,
+      "peerDependencies": false
+    }]
   },
   "plugins": [
     "babel",
