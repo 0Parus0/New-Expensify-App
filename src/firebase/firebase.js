@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 // eslint-disable-next-line import/no-duplicates
 import 'firebase/app';
 import 'firebase/database';
+import 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -19,5 +20,6 @@ firebase.initializeApp(firebaseConfig);
 // const reference = firebase.database().ref();
 
 const database = firebase.database();
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-export { firebase, database as default };
+export { firebase, googleAuthProvider, database as default };

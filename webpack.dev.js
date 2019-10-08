@@ -22,7 +22,8 @@ module.exports = merge(common, {
   mode: 'development',
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, 'public', 'dist')
+    path: path.join(__dirname, 'public', 'dist'),
+    publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -66,6 +67,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, 'public', 'dist'),
     historyApiFallback: true,
-    hot: true   
+    hot: true,
+    port: 8081
   }
 });
