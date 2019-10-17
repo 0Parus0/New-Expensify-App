@@ -44,12 +44,19 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
+        test: /\.(svg|png|jpg|gif|jpeg)$/,
+        use: {
+          loader: 'url-loader'
+        }
+      },
+      {
         test: /\.(sa|sc|c)ss$/,
         use: [
           'style-loader',
           {
             loader: 'css-loader',
             options: {
+              url: false,
               sourceMap: true
             }
           },
@@ -67,6 +74,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, 'public', 'dist'),
     historyApiFallback: true,
+    overlay: true,
     hot: true,
     port: 8081
   }

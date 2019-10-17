@@ -5,6 +5,8 @@ const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const CopyPlugin = require('copy-webpack-plugin');
+
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development' || 'production';
 
@@ -19,7 +21,7 @@ if (process.env.NODE_ENV === 'test') {
 
 module.exports = {
   entry: {
-    app: './src/app.js'
+    app: ['@babel/polyfill', './src/app.js']
   },
   module: {
     rules: [{
@@ -36,15 +38,6 @@ module.exports = {
           options: { minimize: true }
         }
       ]
-    }, {
-      test: /\.(svg|png|jpg|gif)$/,
-      use: {
-        loader: 'file-loader',
-        options: {
-          name: '[name].[hash].[ext]',
-          outputPath: 'imgs'
-        }
-      }
     }]
   },
   plugins: [
@@ -56,6 +49,13 @@ module.exports = {
       'process.env.FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
       'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID),
       'process.env.FIREBASE_APP_ID': JSON.stringify(process.env.FIREBASE_APP_ID)
-    })
+    }),
+    new CopyPlugin([
+      {
+        from: 'src/images/*',
+        to: 'public/dist/',
+        flatten: true
+      }
+    ])
   ] 
 };

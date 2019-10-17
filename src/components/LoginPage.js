@@ -6,8 +6,12 @@ import { startLogin } from '../actions/auth';
 // eslint-disable-next-line no-shadow
 export const LoginPage = ({ startLogin }) => {
   return (
-    <div>
-      <button type="button" onClick={startLogin}>Login</button>  
+    <div className="box-layout">
+      <div className="box-layout__box">
+        <h1 className="box-layout__title">Expensify</h1>
+        <p>Its time to get your expenses under control.</p>
+        <button type="button" onClick={startLogin} className="button">Login with Google</button>  
+      </div>
     </div>
   );
 };
